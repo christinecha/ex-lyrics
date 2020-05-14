@@ -2,7 +2,7 @@ let secrets = {
   MUSIXMATCH_API_KEY: process.env.MUSIXMATCH_API_KEY
 }
 
-if (process.env.NODE_ENV === 'production') {
+if (process.env.NODE_ENV !== 'production') {
   try {
     secrets = require('../../secrets.json')
   } catch (e) { }
