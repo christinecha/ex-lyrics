@@ -10,7 +10,12 @@ module.exports = {
   devServer: {
     contentBase: PUBLIC_DIR,
     compress: true,
-    port: 4242
+    port: 4242,
+    proxy: {
+      '/.netlify/*': {
+        target: 'http://localhost:8888'
+      }
+    }
   },
   output: {
     path: path.resolve(PUBLIC_DIR),
