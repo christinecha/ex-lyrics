@@ -117,12 +117,13 @@ const Results = ({ entries, users, votes }) => {
 
       {entries.map(entry => {
         const entryVotes = votes.filter(v => v.entryId === entry.id)
-        const user = users.find(u => u.uid === entry.userId)
+        const user = users.find(u => u.uid === entry.userId) || { displayName: 'Offline User' }
+        const isCorrect = entry.id === CORRECT_KEY
 
         return (
           <div className='results-entry' data-correct={!user}>
             <p>{entry.text}</p>
-            <p className='byline'>[{user ? user.displayName : 'CORRECT'}]</p>
+            <p className='byline'>[{isCorrect ? 'CORRECT' : user.displayName}]</p>
             --
             <p>{entryVotes.length} votes</p>
           </div>
