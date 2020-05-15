@@ -223,7 +223,7 @@ const Room = ({ id }) => {
   if (!round.complete) {
     if (!entriesComplete) state = 'Waiting for entries'
     else if (!votingComplete) state = 'Waiting for votes'
-    else state = 'Round is over'
+    else state = 'Stuck'
   } else {
     state = 'Round is over'
   }
@@ -236,12 +236,12 @@ const Room = ({ id }) => {
       {round.track && (
         <TrackPreview
           track={round.track}
-          showLine={!votingComplete}
+          showLine={!round.complete}
           entryForm={myEntry ? '_________________________________' : <Entry onSubmit={submitEntry} />}
         />
       )}
-      {/* {!round.complete && votingComplete && <button onClick={endRound}>Reveal!</button>} */}
-      {votingComplete && <Results entries={entries} users={users} votes={votes} />}
+      {!round.complete && <button onClick={endRound}>Reveal!</button>}
+      {round.complete && <Results entries={entries} users={users} votes={votes} />}
       <br />
       {!myVote && !round.complete && entriesComplete && <Ballot entries={entries} onVote={vote} />}
       <Users users={users} />
