@@ -2,7 +2,7 @@ const path = require('path')
 
 const PUBLIC_DIR = path.resolve(__dirname, 'public')
 
-module.exports = [{
+module.exports = {
   entry: {
     "index.js": path.resolve(__dirname, 'src/index.js')
   },
@@ -32,14 +32,4 @@ module.exports = [{
       },
     ]
   }
-}, {
-  entry: {
-    'getTrackLyrics': path.resolve(__dirname, 'src/functions/getTrackLyrics.js'),
-    'searchTracks': path.resolve(__dirname, 'src/functions/searchTracks.js'),
-  },
-  output: {
-    path: path.resolve(__dirname, 'functions')
-  },
-  mode: 'production',
-  target: 'node'
-}]
+}
