@@ -121,7 +121,7 @@ const Results = ({ entries, users, votes }) => {
         const isCorrect = entry.id === CORRECT_KEY
 
         return (
-          <div className='results-entry' data-correct={!user}>
+          <div className='results-entry' data-correct={isCorrect}>
             <p>{entry.text}</p>
             <p className='byline'>[{isCorrect ? 'CORRECT' : user.displayName}]</p>
             --
