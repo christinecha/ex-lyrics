@@ -1,4 +1,3 @@
 node_modules
 public/scripts
 secrets.json
-functions/dist
