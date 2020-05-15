@@ -7,7 +7,7 @@
   "license": "MIT",
   "scripts": {
     "watch": "webpack-dev-server & sass --watch ./src/styles/index.scss ./public/styles/index.css",
-    "build": "webpack & sass ./src/styles/index.scss ./public/styles/index.css",
+    "build": "yarn install && webpack & sass ./src/styles/index.scss ./public/styles/index.css",
     "start": "netlify dev"
   },
   "dependencies": {
