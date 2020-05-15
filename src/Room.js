@@ -200,6 +200,8 @@ const Room = ({ id }) => {
   const users = Object.values(room.users || {}).filter(u => u.online)
   const entriesComplete = entries.length > users.length
 
+  console.log(entries, users)
+
   const vote = (entry) => {
     const voteRef = roundRef.child('votes').child(user.uid)
     voteRef.set({
