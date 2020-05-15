@@ -4,11 +4,11 @@ let secrets = {
 
 console.log(process.env.NODE_ENV)
 
-if (process.env.NODE_ENV !== 'production') {
-  try {
-    secrets = require('../../secrets.json')
-  } catch (e) { }
-}
+// if (process.env.NODE_ENV !== 'production') {
+//   try {
+//     secrets = require('../../secrets.json')
+//   } catch (e) { }
+// }
 
 const { MUSIXMATCH_API_KEY } = secrets
 
