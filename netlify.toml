@@ -2,3 +2,6 @@
   command = "yarn run build"
   functions = "functions"
   publish = "public"
+
+[context.production]
+  environment = { PRODUCTION: "true" }
