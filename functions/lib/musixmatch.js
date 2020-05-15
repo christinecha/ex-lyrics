@@ -2,7 +2,7 @@ let secrets = {
   MUSIXMATCH_API_KEY: process.env.MUSIXMATCH_API_KEY
 }
 
-console.log(process.env.NODE_ENV)
+console.log('env', process.env.NODE_ENV)
 
 // if (process.env.NODE_ENV !== 'production') {
 //   try {
