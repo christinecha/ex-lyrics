@@ -1,4 +1,4 @@
 [build]
-  command = "NODE_ENV=development yarn install && NODE_ENV=production yarn run build"
+  command = "yarn install --production=false && yarn run build"
   functions = "functions"
   publish = "public"
