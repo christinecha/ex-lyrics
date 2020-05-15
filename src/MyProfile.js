@@ -5,7 +5,7 @@ import firebase from './lib/firebase'
 const _MyProfile = () => {
   const user = useUser()
   const [name, setName] = useState(user.displayName || '')
-  const [editing, setEditing] = useState(!user.displayName)
+  const [editing, setEditing] = useState(user.displayName === 'Mystery')
   const trimmedName = name.trim()
 
   const updateName = (e) => {
