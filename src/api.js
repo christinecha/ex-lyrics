@@ -9,7 +9,7 @@ export const getTrackLyrics = ({ trackId }) => {
   })
 }
 
-export const searchTracks = ({ q }) => {
+export const searchTracks = ({ q = '' }) => {
   return axios({
     url: `/.netlify/functions/searchTracks?q=${q}`,
     method: 'GET'

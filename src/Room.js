@@ -10,7 +10,7 @@ import { SECRET_LINE, CORRECT_KEY } from './lib/constants'
 // Show following three words
 // Vote
 
-
+const ADMIN = !!localStorage.getItem('ADMIN')
 
 const LyricsDisplay = ({ lyrics, showLine, entryForm }) => {
   return (
@@ -240,12 +240,12 @@ const Room = ({ id }) => {
           entryForm={myEntry ? '_________________________________' : <Entry onSubmit={submitEntry} />}
         />
       )}
-      {!round.complete && <button onClick={endRound}>Reveal!</button>}
+      {ADMIN && !round.complete && <button onClick={endRound}>Reveal!</button>}
       {round.complete && <Results entries={entries} users={users} votes={votes} />}
       <br />
       {!myVote && !round.complete && entriesComplete && <Ballot entries={entries} onVote={vote} />}
       <Users users={users} />
-      <TrackPicker onChange={track => startNewRound({ track })} />
+      {ADMIN && <TrackPicker onChange={track => startNewRound({ track })} />}
     </div>
   )
 }
