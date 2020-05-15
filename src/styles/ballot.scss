@@ -1,0 +1,13 @@
+.ballot {
+  border: 1px solid pink;
+  padding: 10px;
+  margin-bottom: 20px;
+
+  .options {
+    margin-top: 10px;
+  }
+
+  .option {
+    margin: 5px 0;
+  }
+}

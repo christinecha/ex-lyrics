@@ -1,7 +1,8 @@
-import { getTrackLyrics, searchTracks } from './api'
 import React, { useState, useEffect } from 'react'
 import firebase from './lib/firebase'
-import useUser from './useUser';
+import useUser from './useUser'
+import TrackPicker from './TrackPicker'
+import { SECRET_LINE, CORRECT_KEY } from './lib/constants'
 
 // Pick a random song.
 // Show lyrics of song
@@ -9,35 +10,20 @@ import useUser from './useUser';
 // Show following three words
 // Vote
 
-const LINES_TO_SHOW = 5
-const SECRET_LINE = Math.floor(LINES_TO_SHOW / 2)
-const CORRECT_KEY = 'CORRECT'
-const chop = (uid) => uid.slice(0, 4)
 
-const parseLyrics = (lyrics) => {
-  const body = lyrics.lyrics_body
-  const trimmed = body.split('*******')[0]
-  const allLines = trimmed
-    .split(/\r?\n/)
-    .filter(l => l.trim() && l.trim() !== '...')
 
-  const start = Math.floor(Math.random() * (allLines.length - LINES_TO_SHOW))
-  const lines = allLines.splice(start, LINES_TO_SHOW)
-  return lines
-}
-
-const LyricsDisplay = ({ lyrics, secret }) => {
+const LyricsDisplay = ({ lyrics, showLine, entryForm }) => {
   return (
     <div className='lyrics'>
       <div>...</div>
       {lyrics.map((line, i) => {
-        const words = line.split(/\s/)
-        const isMystery = secret && i === SECRET_LINE
+        // const words = line.split(/\s/)
+        const isMystery = showLine && i === SECRET_LINE
 
         return (
           <div>
             {!isMystery && line}
-            {isMystery && '________________________________'}
+            {isMystery && entryForm}
             {/* {isMystery && words.map((word, i) => {
               const hideWord = true
               const style = {
@@ -58,7 +44,7 @@ const LyricsDisplay = ({ lyrics, secret }) => {
   )
 }
 
-const TrackPreview = ({ track, secret }) => {
+const TrackPreview = ({ track, showLine, entryForm }) => {
   return (
     <div className='track-preview'>
       <h3 className='track-name'>{track.track_name}</h3>
@@ -70,73 +56,40 @@ const TrackPreview = ({ track, secret }) => {
         ))}
       </p>
 
-      {track.lyrics && <LyricsDisplay lyrics={track.lyrics} secret={secret} />}
+      {track.lyrics && <LyricsDisplay lyrics={track.lyrics} showLine={showLine} entryForm={entryForm} />}
     </div>
   )
 }
 
 
-const TrackPicker = ({ onChange }) => {
-  const [query, setQuery] = useState()
 
-  const chooseSong = () => {
-    searchTracks({ q: query })
-      .then(results => {
-        const tracks = results.map(r => r.track).filter(t => t.has_lyrics)
-        const rand = Math.floor(Math.random() * tracks.length)
-        const randomTrack = tracks[rand]
-        randomTrack.genres = []
+const Entry = ({ onSubmit }) => {
+  const [entry, setEntry] = useState('')
 
-        if (randomTrack.primary_genres && randomTrack.primary_genres.music_genre_list) {
-          randomTrack.primary_genres.music_genre_list.forEach(g => {
-            randomTrack.genres.push(g.music_genre.music_genre_name_extended)
-          })
-        }
-
-        getTrackLyrics({ trackId: randomTrack.track_id })
-          .then(lyrics => {
-            const parsed = parseLyrics(lyrics)
-            randomTrack.lyrics = parsed
-
-            onChange(randomTrack)
-          })
-      })
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    onSubmit(entry)
   }
 
   return (
-    <div>
-      {/* <input type="text" value={query} onChange={(e) => setQuery(e.target.value)} /> */}
-      <button onClick={chooseSong}>Start New Round</button>
-    </div>
-  )
-}
-
-const Entry = ({ onSubmit }) => {
-  const [entry, setEntry] = useState()
-
-  return (
-    <div>
+    <form className="entry-form" onSubmit={handleSubmit}>
       <input type="text" value={entry} onChange={(e) => setEntry(e.target.value)} />
-      <button onClick={() => onSubmit(entry)}>Submit Entry</button>
-    </div>
+      <button disabled={!entry.trim()}>Submit Entry</button>
+    </form>
   )
 }
 
 const Ballot = ({ entries, ready, onVote }) => {
-  if (!ready) {
-    return <div>Writing...</div>
-  }
-
   return (
-    <div>
-      Choose the correct line!
-      <div>
+    <div className="ballot">
+      <label>Choose the correct line!</label>
+      <div className="options">
         {entries.map(entry => {
           return (
-            <p>
+            <div className="option">
               <span className="vote" onClick={() => onVote(entry)}>VOTE</span>
               {entry.text}
-            </p>
+            </div>
           )
         })}
       </div>
@@ -150,7 +103,7 @@ const Users = ({ users }) => {
       In this room:
       {users
         .map(user => (
-          <p>{chop(user.uid)}</p>
+          <p>{user.displayName}</p>
         ))}
     </div>
   )
@@ -169,7 +122,7 @@ const Results = ({ entries, users, votes }) => {
         return (
           <div className='results-entry' data-correct={!user}>
             <p>{entry.text}</p>
-            <p className='byline'>[{user ? chop(user.uid) : 'CORRECT'}]</p>
+            <p className='byline'>[{user ? user.displayName : 'CORRECT'}]</p>
             --
             <p>{entryVotes.length} votes</p>
           </div>
@@ -196,6 +149,10 @@ const Room = ({ id }) => {
       const val = snapshot.val()
       setRoom(val)
     })
+
+    window.addEventListener('online', () => {
+      userRef.update({ online: true })
+    });
 
     userRef.onDisconnect().update({ online: false })
   }, [id, user])
@@ -231,7 +188,7 @@ const Room = ({ id }) => {
     entryRef.set({
       id: entryRef.key,
       text: entry,
-      userId: user.uid
+      userId: user.uid,
     })
   }
 
@@ -241,7 +198,7 @@ const Room = ({ id }) => {
   const myEntry = entries.find(e => e.userId === user.uid)
   const votes = Object.values(round.votes || {})
   const users = Object.values(room.users || {}).filter(u => u.online)
-  const ready = entries.length > users.length
+  const entriesComplete = entries.length > users.length
 
   const vote = (entry) => {
     const voteRef = roundRef.child('votes').child(user.uid)
@@ -257,17 +214,33 @@ const Room = ({ id }) => {
 
   console.log('my vote:', myVote)
 
-  const votingComplete = votes.length === users.length
+  const votingComplete = votes.length >= users.length
+
+  let state
+  if (!round.complete) {
+    if (!entriesComplete) state = 'Waiting for entries'
+    else if (!votingComplete) state = 'Waiting for votes'
+    else state = 'Round is over'
+  } else {
+    state = 'Round is over'
+  }
 
   return (
-    <div>
+    <div className="room">
+      <label>Round {Object.keys(room.rounds).length}</label>
+      <div className="status">{state}</div>
       {!round.track && 'No track chosen.'}
-      {round.track && <TrackPreview track={round.track} secret={!round.complete} />}
-      {!round.complete && votingComplete && <button onClick={endRound}>Reveal!</button>}
-      {round.complete && <Results entries={entries} users={users} votes={votes} />}
+      {round.track && (
+        <TrackPreview
+          track={round.track}
+          showLine={!votingComplete}
+          entryForm={myEntry ? '_________________________________' : <Entry onSubmit={submitEntry} />}
+        />
+      )}
+      {/* {!round.complete && votingComplete && <button onClick={endRound}>Reveal!</button>} */}
+      {votingComplete && <Results entries={entries} users={users} votes={votes} />}
       <br />
-      {round.track && !myEntry && !round.complete && < Entry onSubmit={submitEntry} />}
-      {!myVote && !round.complete && <Ballot entries={entries} ready={ready} onVote={vote} />}
+      {!myVote && !round.complete && entriesComplete && <Ballot entries={entries} onVote={vote} />}
       <Users users={users} />
       <TrackPicker onChange={track => startNewRound({ track })} />
     </div>

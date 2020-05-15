@@ -9,8 +9,10 @@ export const UserProvider = ({ children }) => {
   useEffect(() => {
     firebase.auth().signInAnonymously().then(() => {
       firebase.auth().onAuthStateChanged(u => {
+        console.log(u)
         setUser({
-          uid: u.uid
+          uid: u.uid,
+          displayName: u.displayName || 'Mystery'
         })
       })
     })
