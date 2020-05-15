@@ -4,4 +4,4 @@
   publish = "public"
 
 [context.production]
-  environment = { PRODUCTION: "true" }
+  environment = { PRODUCTION = "true" }
