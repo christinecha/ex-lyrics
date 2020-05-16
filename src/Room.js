@@ -7,12 +7,6 @@ import { SECRET_LINE, CORRECT_KEY } from './lib/constants'
 import useRoom from './useRoom';
 import useRound from './useRound';
 
-// Pick a random song.
-// Show lyrics of song
-// Users guess following three words
-// Show following three words
-// Vote
-
 const LyricsDisplay = ({ lyrics, showLine, entryForm }) => {
   return (
     <div className='lyrics'>
@@ -39,11 +33,11 @@ const TrackPreview = ({ track, showLine, entryForm }) => {
   return (
     <div className='track-preview'>
       <h3 className='track-name'>{track.track_name}</h3>
-      <h4 className='track-album'>from the album "{track.album_name}"</h4>
-      <h4 className='track-artist'>by {track.artist_name}</h4>
+      <label className='track-album'>Album: {track.album_name}</label>
+      <label className='track-artist'>Artist: {track.artist_name}</label>
       <p className='track-genres'>
         {track.genres && track.genres.map(genre => (
-          <span key={genre}>{genre}</span>
+          <label key={genre}>{genre}</label>
         ))}
       </p>
 
@@ -107,6 +101,9 @@ const NoRound = () => {
 
   return (
     <>
+      <br />
+      <p>Share this link - <a href={location.href}>{location.href}</a> - with friends so they can join!</p>
+      <br />
       {isAdmin && <TrackPicker onChange={track => startNewRound({ room, track })} />}
     </>
   )

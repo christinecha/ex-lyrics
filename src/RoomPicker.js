@@ -56,13 +56,21 @@ const RoomPicker = ({ history }) => {
 
   return (
     <div>
-      <button onClick={createNew}>Create New Room</button>
-
-      {rooms.map(room => {
-        return (
-          <div>{room.id}</div>
-        )
-      })}
+      <div>
+        <h1>Ex Lyrics</h1>
+        <p>A new multiplayer game for creative minds. Inspired by <a href="https://oxfordgames.co.uk/shop/ex-libris/" target="_blank" rel="noopener noreferrer">Ex Libris</a> and brought to the internet by <a href="https://www.christinecha.com/" target="_blank" rel="noopener noreffer">Christine Cha</a>. </p>
+        <br />
+        <p>
+          For each new round, you'll see an excerpt of a song's lyrics. Fill in the missing line to submit your entry. Don't worry - it doesn't have to be right, just believeable! Once everyone submits their entries, you'll vote for which one you think is the correct line.
+        </p>
+        <br />
+        <p>
+          You get 1 point for each vote your line garners, as well as 1 point if you guess the correct line.
+        </p>
+        <br />
+        <br />
+      </div>
+      <button onClick={createNew}>Start a Game</button>
     </div>
   )
 }

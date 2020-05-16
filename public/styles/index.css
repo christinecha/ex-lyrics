@@ -51,48 +51,6 @@ input {
   padding: 4px 6px;
 }
 
-.track-preview {
-  background: #f0f0f0;
-  margin-bottom: 10px;
-  padding: 10px;
-}
-
-.track-name {
-  margin: 2px 0;
-}
-
-.track-album {
-  margin: 2px 0;
-  color: #666;
-}
-
-.track-artist {
-  margin: 2px 0;
-}
-
-.track-genres span {
-  display: inline-block;
-  margin-right: 5px;
-  font-size: 3rem;
-  text-transform: uppercase;
-  background: white;
-  padding: 2px 4px;
-}
-
-.lyrics {
-  line-height: 1.6em;
-  font-style: italic;
-}
-
-.users-list {
-  background: white;
-  padding: 5px 0;
-  font-size: 2.8rem;
-}
-.users-list label {
-  margin: 0 3px;
-}
-
 .edit-profile {
   position: fixed;
   top: 0;
@@ -131,6 +89,15 @@ input {
   margin-right: 5px;
 }
 
+.room .users-list {
+  background: white;
+  padding: 5px 0;
+  font-size: 2.8rem;
+}
+.room .users-list label {
+  margin: 0 3px;
+}
+
 .round .header {
   display: flex;
   margin-bottom: 10px;
@@ -148,6 +115,34 @@ input {
   box-sizing: border-box;
 }
 
+.track-preview {
+  background: #f0f0f0;
+  margin-bottom: 10px;
+  padding: 10px;
+}
+.track-preview .track-name {
+  margin: 2px 0;
+}
+.track-preview .track-album {
+  display: block;
+  margin: 2px 0;
+  color: #666;
+}
+.track-preview .track-artist {
+  display: block;
+  margin: 2px 0;
+}
+.track-preview .track-genres label {
+  display: inline-block;
+  margin-right: 5px;
+  background: white;
+  padding: 2px 4px;
+}
+
+.lyrics {
+  line-height: 1.6em;
+  font-style: italic;
+}
 .lyrics .line[data-revealed=true] {
   background: yellow;
 }
@@ -161,6 +156,7 @@ input {
   margin-top: 10px;
 }
 .ballot .option {
+  text-transform: capitalize;
   margin: 5px 0;
 }
 .ballot .vote {
