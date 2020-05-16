@@ -47,11 +47,12 @@ const Ballot = ({ ready }) => {
   const room = useRoom()
   const round = useRound()
 
+  const usersOnline = (round.users || []).filter(u => room.users[u.uid] && room.users[u.uid].online)
+
   const myVote = round.votes && round.votes[user.uid]
   const entries = Object.values(round.entries || {})
-  const myEntry = entries.find(e => e.authorId === user.uid)
   const votes = Object.values(round.votes || {})
-  const users = Object.values(room.users || {}).filter(u => u.online)
+  const users = usersOnline
 
   const entriesComplete = entries.length > users.length
 
