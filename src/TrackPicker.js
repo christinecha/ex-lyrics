@@ -33,9 +33,12 @@ const TrackPicker = ({ onChange }) => {
 
         getTrackLyrics({ trackId: randomTrack.track_id })
           .then(lyrics => {
+            if (!lyrics.lyrics_body) {
+              console.warn('THIS SONG HAS NO LYRICS', randomTrack, lyrics)
+            }
+
             const parsed = parseLyrics(lyrics)
             randomTrack.lyrics = parsed
-
             onChange(randomTrack)
           })
       })

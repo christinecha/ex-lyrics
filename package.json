@@ -13,8 +13,8 @@
     "build:client": "webpack && sass ./src/styles/index.scss ./public/styles/index.css",
     "build:functions": "webpack --config ./functions/webpack.config.js",
     "start": "netlify dev",
-    "deploy:staging": "netlify deploy",
-    "deploy": "netlify deploy --prod"
+    "deploy:staging": "yarn run build && netlify deploy",
+    "deploy": "yarn run build && netlify deploy --prod"
   },
   "dependencies": {
     "axios": "^0.19.2",

@@ -126,18 +126,18 @@ const Room = () => {
     })
   }
 
-  console.log(room, round)
   const myVote = round.votes && round.votes[user.uid]
   const entries = Object.values(round.entries || {})
   const myEntry = entries.find(e => e.authorId === user.uid)
   const votes = Object.values(round.votes || {})
   const users = Object.values(room.users || {}).filter(u => u.online)
   const entriesComplete = entries.length > users.length
+  console.log(entries.length, 'entries submitted')
+  console.log(votes.length, 'votes submitted')
 
-  console.log(round.points)
 
   const endRound = () => {
-    const prevPoints = round.points || {}
+    const prevPoints = room.points || {}
 
     // calculate points here
     const allVotedEntries = votes.map(v => {
