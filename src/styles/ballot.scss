@@ -1,28 +1,31 @@
+@import './variables.scss';
+
 .ballot {
-  border: 1px solid pink;
   padding: 10px;
   margin-bottom: 20px;
+  background: $blue-light;
 
   .options {
     margin-top: 10px;
   }
 
   .option {
-    margin: 5px 0;
-  }
-
-  .vote {
-    background: yellow;
-    margin-right: 8px;
+    display: flex;
+    margin: 8px 0;
+    background: white;
+    padding: 4px 6px;
     cursor: pointer;
   }
 }
 
 .results {
   padding: 10px;
-  border: 1px solid black;
+  background: $blue-light;
+  margin-bottom: 20px;
 
   .results-entry {
+    background: white;
+    padding: 4px 6px;
     margin: 5px 0;
 
     &[data-correct="true"] {

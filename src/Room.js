@@ -200,19 +200,25 @@ const Round = () => {
   return (
     <div className="round">
       {isAdmin && <TrackPicker onChange={track => startNewRound({ track, room })} />}
+      {/* {isAdmin && !round.complete && (
+        <>
+          <button onClick={endRound}>Reveal</button>
+          <br />
+          <br />
+        </>
+      )} */}
 
       <div className="header">
         <label className="title">Round {Object.keys(room.rounds).length}</label>
         <div className="status">{state}</div>
       </div>
 
+      <Ballot />
       <TrackPreview
         track={round.track}
         showLine={round.complete}
         entryForm={myEntry ? '_________________________________' : <Entry onSubmit={submitEntry} />}
       />
-      {isAdmin && !round.complete && <button onClick={endRound}>Reveal!</button>}
-      <Ballot />
     </div>
   )
 }

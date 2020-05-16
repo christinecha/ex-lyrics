@@ -75,14 +75,13 @@ const Ballot = ({ ready }) => {
 
   return (
     <div className="ballot">
-      <label>Choose the correct line!</label>
+      <label>Tap to choose the correct line:</label>
       <div className="options">
         {entries.map(entry => {
           if (entry.authorId === user.uid) return null
 
           return (
-            <div key={entry.id} className="option">
-              <span className="vote" onClick={() => vote(entry)}>VOTE</span>
+            <div key={entry.id} className="option" onClick={() => vote(entry)}>
               {entry.text}
             </div>
           )
