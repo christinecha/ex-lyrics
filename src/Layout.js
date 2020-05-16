@@ -27,7 +27,7 @@ const Layout = ({ children }) => {
         {children}
       </main>
 
-      {showProfile && <MyProfile onUpdate={() => setShowProfile(false)} />}
+      {showProfile && <MyProfile onClose={() => setShowProfile(false)} />}
     </div>
   )
 }

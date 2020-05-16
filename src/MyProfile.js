@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import useUser from './useUser'
 import firebase from './lib/firebase'
 
-const _MyProfile = ({ onUpdate }) => {
+const _MyProfile = ({ onClose }) => {
   const user = useUser()
   const [name, setName] = useState(user.displayName || '')
   const trimmedName = name.trim()
@@ -13,17 +13,17 @@ const _MyProfile = ({ onUpdate }) => {
     firebase.auth().currentUser.updateProfile({ displayName: trimmedName }).then(() => {
       user.refetch()
     })
-    onUpdate()
+    onClose()
   }
 
   return (
     <div>
-      <div className="edit-profile">
-        <div className="inner">
+      <div className="edit-profile" onClick={() => onClose()}>
+        <div className="inner" onClick={(e) => e.stopPropagation()}>
           <p>Tell us your name!</p>
           <form onSubmit={updateName}>
             <label>Name</label>
-            <input type="text" maxLength={20} onChange={e => setName(e.target.value)} />
+            <input type="text" defaultValue={user.displayName} maxLength={20} onChange={e => setName(e.target.value)} />
             <button disabled={!trimmedName}>Update</button>
           </form>
         </div>

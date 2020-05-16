@@ -232,7 +232,7 @@ const Room = () => {
 
   return (
     <div className="room">
-      <label>Room {room.id}</label>
+      <label>Room Code: {room.id}</label>
       <Users />
 
       {round && <Round />}

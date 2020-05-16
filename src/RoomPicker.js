@@ -70,6 +70,8 @@ const RoomPicker = ({ history }) => {
         <p>A new multiplayer game for creative minds. Inspired by <a href="https://oxfordgames.co.uk/shop/ex-libris/" target="_blank" rel="noopener noreferrer">Ex Libris</a> and brought to the internet by <a href="https://www.christinecha.com/" target="_blank" rel="noopener noreffer">Christine Cha</a>. </p>
         <br />
         <p>
+          <strong>How to Play</strong>
+          <br />
           For each new round, you'll see an excerpt of a song's lyrics. Fill in the missing line to submit your entry. Don't worry - it doesn't have to be right, just believeable! Once everyone submits their entries, you'll vote for which one you think is the correct line.
         </p>
         <br />
