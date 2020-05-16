@@ -213,11 +213,12 @@ const Room = () => {
 
   if (!user || !room) return null
 
-  const hasAdmin = room.users && room.users[room.creatorId]
+  const admin = room.users && room.users[room.creatorId]
+  const hasAdmin = admin && admin.online
 
   if (!hasAdmin) return (
     <div>
-      The admin of this room has left. Please start a new room.
+      The admin of this room has left. Please wait or start a new room.
     </div>
   )
 
