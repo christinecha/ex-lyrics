@@ -5,21 +5,35 @@ import useRound from "./useRound";
 import useUser from "./useUser";
 
 const Results = ({ entries, users, votes }) => {
+  const entriesWithVotes = entries
+    .map(entry => {
+      const entryVotes = votes.filter(v => v.entryId === entry.id)
+      return {
+        ...entry,
+        votes: entryVotes
+      }
+    })
+    .sort((a, b) => {
+      return a.votes.length > b.votes.length ? -1 : 1
+    })
+
   return (
     <div className='results'>
-      <h3>RESULTS</h3>
+      <label>RESULTS</label>
 
-      {entries.map(entry => {
-        const entryVotes = votes.filter(v => v.entryId === entry.id)
+      {entriesWithVotes.map(entry => {
         const user = users.find(u => u.uid === entry.authorId) || { displayName: 'Offline User' }
         const isCorrect = entry.id === CORRECT_KEY
 
         return (
           <div key={entry.id} className='results-entry' data-correct={isCorrect}>
             <p>{entry.text}</p>
-            <p className='byline'>[{isCorrect ? 'CORRECT' : user.displayName}]</p>
-            --
-            <p>{entryVotes.length} votes</p>
+            <div className="info">
+              <span className='byline'>
+                {isCorrect ? '(Real Lyric)' : `by ${user.displayName}`}
+              </span>
+              <label className="votes">{entry.votes.length} votes</label>
+            </div>
           </div>
         )
       })}

@@ -10,4 +10,38 @@
   .option {
     margin: 5px 0;
   }
+
+  .vote {
+    background: yellow;
+    margin-right: 8px;
+    cursor: pointer;
+  }
 }
+
+.results {
+  padding: 10px;
+  border: 1px solid black;
+
+  .results-entry {
+    margin: 5px 0;
+
+    &[data-correct="true"] {
+      background: greenyellow;
+    }
+
+    .info {
+      display: flex;
+      align-items: center;
+      margin-top: 3px;
+    }
+
+    .byline {
+      font-size: 3rem;
+    }
+
+    .votes {
+      margin-left: 5px;
+    }
+  }
+}
+

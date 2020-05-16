@@ -9,6 +9,16 @@ export const getTrackLyrics = ({ trackId }) => {
   })
 }
 
+export const getRichSync = ({ trackId }) => {
+  return axios({
+    url: `/.netlify/functions/getRichSync?trackId=${trackId}`,
+    method: 'GET'
+  }).then(res => {
+    console.log(res)
+    // return res.data.lyrics
+  })
+}
+
 export const searchTracks = ({ q = '' }) => {
   return axios({
     url: `/.netlify/functions/searchTracks?q=${q}`,

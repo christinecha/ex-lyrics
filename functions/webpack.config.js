@@ -6,6 +6,7 @@ const FUNCTIONS_DIST_DIR = path.resolve(__dirname, 'dist')
 module.exports = {
   entry: {
     "getTrackLyrics": path.resolve(FUNCTIONS_SRC_DIR, 'getTrackLyrics.js'),
+    "getRichSync": path.resolve(FUNCTIONS_SRC_DIR, 'getRichSync.js'),
     "searchTracks": path.resolve(FUNCTIONS_SRC_DIR, 'searchTracks.js'),
   },
   mode: process.env.NODE_ENV,

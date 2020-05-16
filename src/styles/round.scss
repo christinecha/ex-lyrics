@@ -1,0 +1,28 @@
+.round {
+  .header {
+    display: flex;
+    margin-bottom: 10px;
+    align-items: center;
+    background: #ddd;
+    border: 1px solid black;
+  }
+
+  .title {
+    padding: 2px 5px;
+  }
+
+  .status {
+    flex: 1;
+    background: yellow;
+    padding: 2px 5px;
+    box-sizing: border-box;
+  }
+}
+
+.lyrics {
+  .line {
+    &[data-revealed="true"] {
+      background: yellow;
+    }
+  }
+}

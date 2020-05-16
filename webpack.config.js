@@ -11,6 +11,7 @@ module.exports = {
     contentBase: PUBLIC_DIR,
     compress: true,
     port: 4242,
+    historyApiFallback: true,
     proxy: {
       '/.netlify/*': {
         target: 'http://localhost:8888'

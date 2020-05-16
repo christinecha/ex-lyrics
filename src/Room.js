@@ -13,24 +13,22 @@ import useRound from './useRound';
 // Show following three words
 // Vote
 
-const ADMIN = !!localStorage.getItem('ADMIN')
-
 const LyricsDisplay = ({ lyrics, showLine, entryForm }) => {
   return (
     <div className='lyrics'>
       <div>...</div>
       {lyrics.map((line, i) => {
         // const words = line.split(/\s/)
-        const isMystery = showLine && i === SECRET_LINE
+        const isMystery = !showLine && i === SECRET_LINE
+        const isRevealed = showLine && i === SECRET_LINE
 
         return (
-          <div key={i}>
+          <div className="line" data-revealed={isRevealed} key={i}>
             {!isMystery && line}
             {isMystery && entryForm}
           </div>
         )
       })}
-      <div>...</div>
     </div>
   )
 }
@@ -70,9 +68,10 @@ const Entry = ({ onSubmit }) => {
   )
 }
 
-const Users = ({ users }) => {
-  const round = useRound()
-  const points = round.points || {}
+const Users = () => {
+  const room = useRoom()
+  const users = Object.values(room.users || {})
+  const points = room.points || {}
 
   return (
     <div className='users-list'>
@@ -85,35 +84,41 @@ const Users = ({ users }) => {
   )
 }
 
+const startNewRound = ({ room, track }) => {
+  const newRoundRef = room.ref.child('rounds').push()
+  newRoundRef.update({
+    track,
+    entries: {
+      [CORRECT_KEY]: {
+        id: CORRECT_KEY,
+        text: track.lyrics[SECRET_LINE],
+      }
+    }
+  })
+  room.ref.update({ activeRound: newRoundRef.key })
+}
 
-const Room = () => {
+const NoRound = () => {
   const user = useUser()
   const room = useRoom()
   const round = useRound()
 
-  const startNewRound = ({ track }) => {
-    const newRoundRef = room.ref.child('rounds').push()
-    newRoundRef.update({
-      track,
-      entries: {
-        [CORRECT_KEY]: {
-          id: CORRECT_KEY,
-          text: track.lyrics[SECRET_LINE],
-        }
-      }
-    })
-    room.ref.update({ activeRound: newRoundRef.key })
-  }
+  const isAdmin = room.creatorId === user.uid
 
-  if (!round) {
-    console.warn('No round found.')
-    return (
-      <>
-        {ADMIN && <TrackPicker onChange={track => startNewRound({ track })} />}
-      </>
+  return (
+    <>
+      {isAdmin && <TrackPicker onChange={track => startNewRound({ room, track })} />}
+    </>
+  )
+}
 
-    )
-  }
+const Round = () => {
+  const user = useUser()
+  const room = useRoom()
+  const round = useRound()
+
+  const isAdmin = room.creatorId === user.uid
+
 
   const submitEntry = (entry) => {
     console.log(entry)
@@ -135,8 +140,9 @@ const Room = () => {
   console.log(entries.length, 'entries submitted')
   console.log(votes.length, 'votes submitted')
 
-
   const endRound = () => {
+    if (round.complete) return
+
     const prevPoints = room.points || {}
 
     // calculate points here
@@ -158,12 +164,21 @@ const Room = () => {
       points[winner] += 1
     })
 
-    round.ref.update({ complete: true, points })
+    round.ref.update({ complete: true })
+    room.ref.update({ points })
   }
+
+  useEffect(() => {
+    if (!isAdmin) return
+    if (votes.length >= users.length) {
+      endRound()
+    }
+  }, [isAdmin, votes, users])
 
   console.log('my vote:', myVote)
 
   const votingComplete = votes.length >= users.length
+
 
   let state
   if (!round.complete) {
@@ -175,21 +190,38 @@ const Room = () => {
   }
 
   return (
-    <div className="room">
-      <label>Room {room.id}</label>
-      <br />
-      <label>Round {Object.keys(room.rounds).length}</label>
-      <div className="status">{state}</div>
-      <Users users={users} />
+    <div className="round">
+      <div className="header">
+        <label className="title">Round {Object.keys(room.rounds).length}</label>
+        <label className="status">{state}</label>
+      </div>
+
       <TrackPreview
         track={round.track}
-        showLine={!round.complete}
+        showLine={round.complete}
         entryForm={myEntry ? '_________________________________' : <Entry onSubmit={submitEntry} />}
       />
-      {ADMIN && !round.complete && <button onClick={endRound}>Reveal!</button>}
-      <br />
+      {isAdmin && !round.complete && <button onClick={endRound}>Reveal!</button>}
       <Ballot />
-      {ADMIN && <TrackPicker onChange={track => startNewRound({ track })} />}
+      {isAdmin && <TrackPicker onChange={track => startNewRound({ track, room })} />}
+    </div>
+  )
+}
+
+const Room = () => {
+  const user = useUser()
+  const room = useRoom()
+  const round = useRound()
+
+  if (!user || !room) return null
+
+  return (
+    <div className="room">
+      <label>Room {room.id}</label>
+      <Users />
+
+      {round && <Round />}
+      {!round && <NoRound />}
     </div>
   )
 }

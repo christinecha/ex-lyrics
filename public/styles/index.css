@@ -1,10 +1,35 @@
+html {
+  font-size: 4px;
+}
+
 body {
   font-family: Arial, Helvetica, sans-serif;
-  padding: 20px;
+  font-size: 4rem;
+  padding: 10px;
+}
+
+h2 {
+  font-size: 4.4rem;
+  margin: 0;
+}
+
+h3 {
+  font-size: 4.2rem;
+  margin: 0;
+}
+
+h4 {
+  font-size: 4rem;
+  margin: 0;
+}
+
+p {
+  font-size: 4rem;
+  margin: 0;
 }
 
 label {
-  font-size: 11px;
+  font-size: 3rem;
   font-weight: bold;
   text-transform: uppercase;
   letter-spacing: 0.01em;
@@ -22,7 +47,7 @@ button[disabled] {
 }
 
 input {
-  font-size: 16px;
+  font-size: 4rem;
   padding: 4px 6px;
 }
 
@@ -48,7 +73,7 @@ input {
 .track-genres span {
   display: inline-block;
   margin-right: 5px;
-  font-size: 13px;
+  font-size: 3rem;
   text-transform: uppercase;
   background: white;
   padding: 2px 4px;
@@ -62,38 +87,10 @@ input {
 .users-list {
   background: white;
   padding: 5px 0;
-  font-size: 11px;
+  font-size: 2.8rem;
 }
 .users-list label {
   margin: 0 3px;
-}
-
-.results {
-  padding: 10px;
-  border: 1px solid black;
-}
-
-.results-entry {
-  margin-bottom: 10px;
-}
-
-.results-entry p {
-  margin: 2px 0;
-}
-
-.results-entry[data-correct=true] {
-  background: greenyellow;
-}
-
-.byline {
-  text-transform: uppercase;
-  font-size: 12px;
-}
-
-.vote {
-  background: yellow;
-  margin-right: 8px;
-  cursor: pointer;
 }
 
 .edit-profile {
@@ -134,14 +131,25 @@ input {
   margin-right: 5px;
 }
 
-.room .status {
-  width: 100%;
+.round .header {
+  display: flex;
+  margin-bottom: 10px;
+  align-items: center;
+  background: #ddd;
+  border: 1px solid black;
+}
+.round .title {
+  padding: 2px 5px;
+}
+.round .status {
+  flex: 1;
   background: yellow;
-  font-size: 12px;
-  text-transform: uppercase;
-  font-weight: bold;
-  padding: 5px 8px;
-  margin: 10px 0;
+  padding: 2px 5px;
+  box-sizing: border-box;
+}
+
+.lyrics .line[data-revealed=true] {
+  background: yellow;
 }
 
 .ballot {
@@ -154,6 +162,33 @@ input {
 }
 .ballot .option {
   margin: 5px 0;
+}
+.ballot .vote {
+  background: yellow;
+  margin-right: 8px;
+  cursor: pointer;
+}
+
+.results {
+  padding: 10px;
+  border: 1px solid black;
+}
+.results .results-entry {
+  margin: 5px 0;
+}
+.results .results-entry[data-correct=true] {
+  background: greenyellow;
+}
+.results .results-entry .info {
+  display: flex;
+  align-items: center;
+  margin-top: 3px;
+}
+.results .results-entry .byline {
+  font-size: 3rem;
+}
+.results .results-entry .votes {
+  margin-left: 5px;
 }
 
 /*# sourceMappingURL=index.css.map */
