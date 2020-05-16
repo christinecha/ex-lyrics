@@ -72,7 +72,7 @@ const RoomPicker = ({ history }) => {
         <p>
           <strong>How to Play</strong>
           <br />
-          For each new round, you'll see an excerpt of a song's lyrics. Fill in the missing line to submit your entry. Don't worry - it doesn't have to be right, just believeable! Once everyone submits their entries, you'll vote for which one you think is the correct line.
+          For each new round, you'll see an excerpt of a song's lyrics. Fill in the missing line to submit your entry. Don't worry - it doesn't have to be right, just believable! Once everyone submits their entries, you'll vote for which one you think is the correct line.
         </p>
         <br />
         <p>
