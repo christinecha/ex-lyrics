@@ -9,28 +9,28 @@ import {
 import Room from './Room'
 import RoomPicker from './RoomPicker'
 import ReactDOM from 'react-dom'
-import { UserProvider } from './useUser';
-import MyProfile from './MyProfile'
-import { RoomProvider } from './useRoom';
-import { RoundProvider } from './useRound';
+import { UserProvider } from './useUser'
+import { RoomProvider } from './useRoom'
+import { RoundProvider } from './useRound'
+import Layout from './Layout'
 
 const App = () => {
   return (
     <UserProvider>
-      <MyProfile />
-
       <Router>
-        <Route exact path="/" component={RoomPicker} />
-        <Route
-          path="/room/:id"
-          component={({ match }) => (
-            <RoomProvider id={match.params.id}>
-              <RoundProvider>
-                <Room />
-              </RoundProvider>
-            </RoomProvider>
-          )}
-        />
+        <Layout>
+          <Route exact path="/" component={RoomPicker} />
+          <Route
+            path="/room/:id"
+            component={({ match }) => (
+              <RoomProvider id={match.params.id}>
+                <RoundProvider>
+                  <Room />
+                </RoundProvider>
+              </RoomProvider>
+            )}
+          />
+        </Layout>
       </Router>
     </UserProvider>
   )

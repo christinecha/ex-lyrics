@@ -1,0 +1,19 @@
+header {
+  background: #eee;
+  margin-bottom: 5px;
+  padding: 10px;
+  display: flex;
+  justify-content: space-between;
+
+  .user-info {
+    display: flex;
+
+    button {
+      margin-left: 10px;
+    }
+  }
+}
+
+main {
+  padding: 10px;
+}

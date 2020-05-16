@@ -15,20 +15,28 @@ export const RoomProvider = ({ id, children }) => {
 
     const roomRef = firebase.database().ref('rooms').child(id)
     const userRef = roomRef.child('users').child(user.uid)
-    userRef.update({ ...user, online: true })
+    userRef.update({ uid: user.uid, displayName: user.displayName, online: true })
 
-    roomRef.on('value', snapshot => {
+    const onRoomUpdate = snapshot => {
       const val = snapshot.val()
       val.ref = roomRef
       val.id = id
       setRoom(val)
-    })
+    }
 
-    window.addEventListener('online', () => {
+    const onOnline = () => {
       userRef.update({ online: true })
-    });
+    }
 
+    roomRef.on('value', onRoomUpdate)
+    window.addEventListener('online', onOnline);
     userRef.onDisconnect().set({ online: false })
+
+    return () => {
+      roomRef.off('value', onRoomUpdate)
+      window.removeEventListener('online', onOnline);
+      userRef.onDisconnect().cancel()
+    }
   }, [id, user])
 
 
