@@ -70,7 +70,7 @@ const RoomPicker = ({ history }) => {
         <br />
         <br />
       </div>
-      <button onClick={createNew}>Start a Game</button>
+      <button onClick={createNew}>Start a New Game</button>
     </div>
   )
 }
