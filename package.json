@@ -6,9 +6,15 @@
   "author": "Christine Cha <hello@christinecha.com>",
   "license": "MIT",
   "scripts": {
-    "watch": "webpack-dev-server & sass --watch ./src/styles/index.scss ./public/styles/index.css",
-    "build": "webpack && sass ./src/styles/index.scss ./public/styles/index.css",
-    "start": "netlify dev"
+    "watch": "NODE_ENV=development yarn run watch:functions & yarn run watch:client",
+    "watch:client": "webpack-dev-server & sass --watch ./src/styles/index.scss ./public/styles/index.css",
+    "watch:functions": "webpack --config ./functions/webpack.config.js --watch",
+    "build": "NODE_ENV=production yarn run build:functions && yarn run build:client",
+    "build:client": "webpack && sass ./src/styles/index.scss ./public/styles/index.css",
+    "build:functions": "webpack --config ./functions/webpack.config.js",
+    "start": "netlify dev",
+    "deploy:staging": "netlify deploy",
+    "deploy": "netlify deploy --prod"
   },
   "dependencies": {
     "axios": "^0.19.2",

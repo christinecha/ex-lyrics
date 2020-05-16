@@ -23,6 +23,7 @@ button {
 }
 
 input {
+  font-size: 16px;
   padding: 4px 6px;
 }
 
@@ -56,16 +57,17 @@ input {
 
 .lyrics {
   line-height: 1.6em;
-  white-space: pre;
   font-style: italic;
 }
 
 .users-list {
-  position: fixed;
-  top: 0;
-  right: 0;
   background: white;
-  padding: 20px;
+  padding: 5px 0;
+  font-size: 11px;
+
+  label {
+    margin: 0 3px;
+  }
 }
 
 .results {

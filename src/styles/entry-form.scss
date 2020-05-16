@@ -1,9 +1,11 @@
 .entry-form {
   display: flex;
-  margin-bottom: 0;
+  width: 100%;
+  max-width: 500px;
+  margin: 2px 0;
 
   input {
-    width: 400px;
+    flex: 1;
     margin-right: 5px;
   }
 }

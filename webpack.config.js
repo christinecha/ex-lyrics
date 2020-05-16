@@ -6,7 +6,7 @@ module.exports = {
   entry: {
     "index.js": path.resolve(__dirname, 'src/index.js')
   },
-  mode: 'production',
+  mode: process.env.NODE_ENV,
   devServer: {
     contentBase: PUBLIC_DIR,
     compress: true,

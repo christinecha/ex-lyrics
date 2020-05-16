@@ -1,14 +1,4 @@
-let secrets = {
-  MUSIXMATCH_API_KEY: process.env.MUSIXMATCH_API_KEY
-}
-
-// if (!secrets.MUSIXMATCH_API_KEY) {
-//   try {
-//     secrets = require('../../secrets.json')
-//   } catch (e) { }
-// }
-
-const { MUSIXMATCH_API_KEY } = secrets
+const MUSIXMATCH_API_KEY = process.env.MUSIXMATCH_API_KEY
 
 const MUSIXMATCH_URL = 'https://api.musixmatch.com/ws/1.1'
 const API_KEY = `apikey=${MUSIXMATCH_API_KEY}`
