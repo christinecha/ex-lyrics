@@ -71,6 +71,7 @@ const Users = () => {
     <div className='users-list'>
       In this room:
       {users
+        .filter(u => u.online)
         .map(user => (
           <label key={user.uid}>{user.displayName} ({points[user.uid] || 0})</label>
         ))}
@@ -79,9 +80,11 @@ const Users = () => {
 }
 
 const startNewRound = ({ room, track }) => {
+  const users = Object.values(room.users || {}).filter(u => u.online)
   const newRoundRef = room.ref.child('rounds').push()
   newRoundRef.update({
     track,
+    users,
     entries: {
       [CORRECT_KEY]: {
         id: CORRECT_KEY,
@@ -115,7 +118,12 @@ const Round = () => {
   const round = useRound()
 
   const isAdmin = room.creatorId === user.uid
+  const usersOnline = (round.users || []).filter(u => room.users[u.uid] && room.users[u.uid].online)
 
+
+  if (!usersOnline.find(u => u.uid === user.uid)) {
+    return <p>Round already started. Please wait until the next one starts.</p>
+  }
 
   const submitEntry = (entry) => {
     console.log(entry)
@@ -132,7 +140,7 @@ const Round = () => {
   const entries = Object.values(round.entries || {})
   const myEntry = entries.find(e => e.authorId === user.uid)
   const votes = Object.values(round.votes || {})
-  const users = Object.values(room.users || {}).filter(u => u.online)
+  const users = usersOnline
   const entriesComplete = entries.length > users.length
   console.log(entries.length, 'entries submitted')
   console.log(votes.length, 'votes submitted')
