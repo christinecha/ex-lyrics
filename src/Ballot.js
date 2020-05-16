@@ -68,9 +68,9 @@ const Ballot = ({ ready }) => {
     <Results entries={entries} users={users} votes={votes} />
   )
 
-  if (!entriesComplete) return 'waiting for entries'
+  if (!entriesComplete) return null
 
-  if (myVote) return 'already voted, waiting'
+  if (myVote) return null
 
   return (
     <div className="ballot">
