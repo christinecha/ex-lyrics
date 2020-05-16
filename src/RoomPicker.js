@@ -23,7 +23,7 @@ const CreateRoom = () => {
   const [name, setName] = useState('')
   return (
     <div>
-      <input type="text" value={name} onChange={e => setName(e.target.value)} />
+      <input type="text" onChange={e => setName(e.target.value)} />
       <button>Create</button>
     </div>
   )
@@ -65,7 +65,7 @@ const RoomPicker = ({ history }) => {
         </p>
         <br />
         <p>
-          You get 1 point for each vote your line garners, as well as 1 point if you guess the correct line.
+          You get 1 point for each vote your line gets, as well as 1 point if you guess the correct line.
         </p>
         <br />
         <br />

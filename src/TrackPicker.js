@@ -35,6 +35,7 @@ const TrackPicker = ({ onChange }) => {
           .then(lyrics => {
             if (!lyrics.lyrics_body) {
               console.warn('THIS SONG HAS NO LYRICS', randomTrack, lyrics)
+              return
             }
 
             const parsed = parseLyrics(lyrics)
@@ -45,8 +46,9 @@ const TrackPicker = ({ onChange }) => {
   }
 
   return (
-    <div>
-      <input type="text" value={query} onChange={(e) => setQuery(e.target.value)} />
+    <div className="track-picker">
+      <input type="text" placeholder="Optional Song Keyword(s)" onChange={(e) => setQuery(e.target.value)} />
+      <br />
       <button onClick={chooseSong}>Start New Round</button>
     </div>
   )

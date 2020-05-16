@@ -51,6 +51,15 @@ input {
   padding: 4px 6px;
 }
 
+.track-picker {
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
+.track-picker input {
+  width: 100%;
+  border: 1px solid black;
+}
+
 .edit-profile {
   position: fixed;
   top: 0;

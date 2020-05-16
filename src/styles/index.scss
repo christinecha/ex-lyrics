@@ -52,6 +52,16 @@ input {
   padding: 4px 6px;
 }
 
+.track-picker {
+  margin-top: 20px;
+  margin-bottom: 10px;
+
+  input {
+    width: 100%;
+    border: 1px solid black;
+  }
+}
+
 @import './my-profile.scss';
 @import './entry-form.scss';
 @import './room.scss';

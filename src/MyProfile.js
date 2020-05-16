@@ -23,7 +23,7 @@ const _MyProfile = () => {
             <p>Tell us your name!</p>
             <form onSubmit={updateName}>
               <label>Name</label>
-              <input type="text" value={name} onChange={e => setName(e.target.value)} />
+              <input type="text" onChange={e => setName(e.target.value)} />
               <button disabled={!trimmedName}>Update</button>
             </form>
           </div>

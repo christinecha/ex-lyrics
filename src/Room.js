@@ -193,6 +193,8 @@ const Round = () => {
         <label className="status">{state}</label>
       </div>
 
+      {isAdmin && <TrackPicker onChange={track => startNewRound({ track, room })} />}
+
       <TrackPreview
         track={round.track}
         showLine={round.complete}
@@ -200,7 +202,6 @@ const Round = () => {
       />
       {isAdmin && !round.complete && <button onClick={endRound}>Reveal!</button>}
       <Ballot />
-      {isAdmin && <TrackPicker onChange={track => startNewRound({ track, room })} />}
     </div>
   )
 }
