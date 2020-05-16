@@ -8,16 +8,18 @@
   }
 
   .title {
-    background: $blue-medium;
+    background: $blue-dark;
     color: white;
     padding: 3px 5px;
+    border: 1px solid $blue-dark;
   }
 
   .status {
     flex: 1;
     font-size: 3.5rem;
-    background: #eee;
+    font-style: italic;
     padding: 3px 8px;
+    border: 1px solid $blue-dark;
     box-sizing: border-box;
   }
 }
@@ -56,8 +58,14 @@
   font-style: italic; 
 
   .line {
+    min-height: 1.6em;
+    
     &[data-revealed="true"] {
       background: yellow;
+    }
+
+    &[data-hidden="true"] {
+      border-bottom: 1px solid currentColor;
     }
   }
 }

@@ -17,7 +17,7 @@ const LyricsDisplay = ({ lyrics, showLine, entryForm }) => {
         const isRevealed = showLine && i === SECRET_LINE
 
         return (
-          <div className="line" data-revealed={isRevealed} key={i}>
+          <div className="line" data-revealed={isRevealed} data-hidden={isMystery} key={i}>
             {!isMystery && line}
             {isMystery && entryForm}
           </div>
@@ -190,8 +190,8 @@ const Round = () => {
 
   let state
   if (!round.complete) {
-    if (!entriesComplete) state = 'Waiting for entries'
-    else if (!votingComplete) state = 'Waiting for votes'
+    if (!entriesComplete) state = 'Waiting for entries...'
+    else if (!votingComplete) state = 'Waiting for votes...'
     else state = 'Voting complete! Reveal!'
   } else {
     state = 'Round is over'
@@ -217,7 +217,7 @@ const Round = () => {
       <TrackPreview
         track={round.track}
         showLine={round.complete}
-        entryForm={myEntry ? '_________________________________' : <Entry onSubmit={submitEntry} />}
+        entryForm={myEntry ? '' : <Entry onSubmit={submitEntry} />}
       />
     </div>
   )

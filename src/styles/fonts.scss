@@ -6,6 +6,20 @@
 
 @font-face {
   font-family: "Rubik";
+  font-weight: 400;
+  font-style: italic;
+  src: url("/assets/fonts/Rubik/Rubik-Italic.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "Rubik";
   font-weight: 700;
   src: url("/assets/fonts/Rubik/Rubik-Medium.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "Rubik";
+  font-weight: 700;
+  font-style: italic;
+  src: url("/assets/fonts/Rubik/Rubik-MediumItalic.ttf") format("truetype");
 }
