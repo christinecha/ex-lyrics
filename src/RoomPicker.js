@@ -32,6 +32,7 @@ const CreateRoom = () => {
 const RoomPicker = ({ history }) => {
   const user = useUser()
   const [rooms, setRooms] = useState()
+  const [roomCode, setRoomCode] = useState()
   const roomsRef = firebase.database().ref('rooms')
 
   useEffect(() => {
@@ -54,6 +55,14 @@ const RoomPicker = ({ history }) => {
     history.push(`/room/${id}`)
   }
 
+  const joinExisting = () => {
+    if (!roomCode) return alert('No room code entered.')
+    const code = roomCode.trim().toLowerCase()
+    const room = rooms.find(r => r.id === code)
+    if (!room) return alert('No such room exists.')
+    history.push(`/room/${code}`)
+  }
+
   return (
     <div>
       <div>
@@ -71,6 +80,14 @@ const RoomPicker = ({ history }) => {
         <br />
       </div>
       <button onClick={createNew}>Start a New Game</button>
+
+      <br />
+      <br />
+      <p>Or, join an existing game:</p>
+      <br />
+      <input type="text" placeholder="4-Letter Room Code" onChange={e => setRoomCode(e.target.value)} />
+      <button onClick={joinExisting}>Join</button>
+
     </div>
   )
 }
