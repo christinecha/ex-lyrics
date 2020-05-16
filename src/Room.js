@@ -98,17 +98,20 @@ const startNewRound = ({ room, track }) => {
 const NoRound = () => {
   const user = useUser()
   const room = useRoom()
-  const round = useRound()
 
   const isAdmin = room.creatorId === user.uid
 
   return (
-    <>
+    <div className="round">
+      <div className="header">
+        <div className="status">Waiting for the first round to start...</div>
+      </div>
       <br />
-      <p>Share this link - <a href={location.href}>{location.href}</a> - with friends so they can join!</p>
+      <label>Room Code</label>
+      <h1>{room.id.toUpperCase()}</h1>
       <br />
       {isAdmin && <TrackPicker onChange={track => startNewRound({ room, track })} />}
-    </>
+    </div>
   )
 }
 
@@ -196,12 +199,12 @@ const Round = () => {
 
   return (
     <div className="round">
+      {isAdmin && <TrackPicker onChange={track => startNewRound({ track, room })} />}
+
       <div className="header">
         <label className="title">Round {Object.keys(room.rounds).length}</label>
-        <label className="status">{state}</label>
+        <div className="status">{state}</div>
       </div>
-
-      {isAdmin && <TrackPicker onChange={track => startNewRound({ track, room })} />}
 
       <TrackPreview
         track={round.track}
@@ -232,7 +235,7 @@ const Room = () => {
 
   return (
     <div className="room">
-      <label>Room Code: {room.id}</label>
+      {round && <label>Room Code: {room.id}</label>}
       <Users />
 
       {round && <Round />}

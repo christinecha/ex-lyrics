@@ -1,20 +1,23 @@
+@import './variables.scss';
+
 .round {
   .header {
     display: flex;
     margin-bottom: 10px;
     align-items: center;
-    background: #ddd;
-    border: 1px solid black;
   }
 
   .title {
-    padding: 2px 5px;
+    background: $blue-medium;
+    color: white;
+    padding: 3px 5px;
   }
 
   .status {
     flex: 1;
-    background: yellow;
-    padding: 2px 5px;
+    font-size: 3rem;
+    background: #eee;
+    padding: 3px 8px;
     box-sizing: border-box;
   }
 }
