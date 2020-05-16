@@ -28,7 +28,7 @@ export const RoomProvider = ({ id, children }) => {
       userRef.update({ online: true })
     });
 
-    userRef.onDisconnect().update({ online: false })
+    userRef.onDisconnect().set({ online: false })
   }, [id, user])
 
 
