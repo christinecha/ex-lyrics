@@ -20,6 +20,7 @@ export const RoomProvider = ({ id, children }) => {
     roomRef.on('value', snapshot => {
       const val = snapshot.val()
       val.ref = roomRef
+      val.id = id
       setRoom(val)
     })
 

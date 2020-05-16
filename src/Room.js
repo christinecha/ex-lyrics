@@ -176,6 +176,8 @@ const Room = () => {
 
   return (
     <div className="room">
+      <label>Room {room.id}</label>
+      <br />
       <label>Round {Object.keys(room.rounds).length}</label>
       <div className="status">{state}</div>
       <Users users={users} />
