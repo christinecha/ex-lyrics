@@ -1,5 +1,6 @@
 node_modules
 public/scripts
+public/styles
 secrets.json
 functions/dist
 
