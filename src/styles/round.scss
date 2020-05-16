@@ -3,7 +3,6 @@
 .round {
   .header {
     display: flex;
-    margin-bottom: 10px;
     align-items: center;
   }
 
@@ -27,7 +26,9 @@
 
 .track-preview {
   background: #f0f0f0;
+  border: 1px solid $blue-dark;
   margin-bottom: 10px;
+  margin-top: -1px;
   padding: 10px;
 
   .track-name {
@@ -59,13 +60,15 @@
 
   .line {
     min-height: 1.6em;
-    
+
     &[data-revealed="true"] {
-      background: yellow;
+      color: $blue-dark;
+      font-weight: bold;
     }
 
     &[data-hidden="true"] {
-      border-bottom: 1px solid currentColor;
+      background: white;
+      text-align: center;
     }
   }
 }

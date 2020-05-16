@@ -1,10 +1,14 @@
 @import './variables.scss';
 
-.ballot {
+.ballot,
+.results {
   padding: 10px;
-  margin-bottom: 20px;
   background: $blue-light;
+  border: 1px solid $blue-dark;
+  margin-top: -1px;
+}
 
+.ballot {
   .options {
     margin-top: 10px;
   }
@@ -19,17 +23,17 @@
 }
 
 .results {
-  padding: 10px;
-  background: $blue-light;
-  margin-bottom: 20px;
-
   .results-entry {
     background: white;
     padding: 4px 6px;
-    margin: 5px 0;
+
+    &:not(:last-child) {
+      margin-bottom: 5px;
+    }
 
     &[data-correct="true"] {
-      background: greenyellow;
+      background: $blue-dark;
+      color: white;
     }
 
     .info {

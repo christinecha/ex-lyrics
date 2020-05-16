@@ -19,8 +19,6 @@ const Results = ({ entries, users, votes }) => {
 
   return (
     <div className='results'>
-      <label>RESULTS</label>
-
       {entriesWithVotes.map(entry => {
         const user = users.find(u => u.uid === entry.authorId) || { displayName: 'Offline User' }
         const isCorrect = entry.id === CORRECT_KEY
@@ -32,7 +30,7 @@ const Results = ({ entries, users, votes }) => {
               <span className='byline'>
                 {isCorrect ? '(Real Lyric)' : `by ${user.displayName}`}
               </span>
-              <label className="votes">{entry.votes.length} votes</label>
+              {!!entry.votes.length && <label className="votes">{entry.votes.length} vote{entry.votes.length === 1 ? '' : 's'}</label>}
             </div>
           </div>
         )
