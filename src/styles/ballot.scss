@@ -3,7 +3,6 @@
 .ballot,
 .results {
   padding: 10px;
-  background: $blue-light;
   border: 1px solid $blue-dark;
   margin-top: -1px;
 }
@@ -32,8 +31,7 @@
     }
 
     &[data-correct="true"] {
-      background: $blue-dark;
-      color: white;
+      background: $yellow;
     }
 
     .info {

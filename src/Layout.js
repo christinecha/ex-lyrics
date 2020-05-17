@@ -13,7 +13,7 @@ const Layout = ({ children }) => {
   }, [user])
 
   return (
-    <div>
+    <div className="layout">
       <header>
         <Link to="/">Ex Lyrics</Link>
 

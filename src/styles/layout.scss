@@ -1,6 +1,11 @@
+.layout {
+  display: flex;
+  flex-direction: column;
+  height: calc(100vh - 20px);
+}
+
 header {
   background: #eee;
-  margin-bottom: 5px;
   padding: 10px;
   display: flex;
   justify-content: space-between;
@@ -15,5 +20,7 @@ header {
 }
 
 main {
+  flex: 1;
   padding: 10px;
+  overflow: scroll;
 }

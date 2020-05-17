@@ -10,6 +10,9 @@ body {
   font-size: 4rem;
   padding: 0;
   margin: 0;
+  border: 10px solid $blue-dark;
+  overflow: hidden;
+  letter-spacing: -0.02ch;
 }
 
 h1 {
