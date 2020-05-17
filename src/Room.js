@@ -73,7 +73,7 @@ const Users = () => {
       {users
         .filter(u => u.online)
         .map(user => (
-          <label key={user.uid}>{user.displayName} ({points[user.uid] || 0})</label>
+          <label key={user.uid}>{user.displayName || 'Anonymous'} ({points[user.uid] || 0})</label>
         ))}
     </div>
   )

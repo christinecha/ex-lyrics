@@ -7,6 +7,11 @@ const _MyProfile = ({ onClose }) => {
   const [name, setName] = useState(user.displayName || '')
   const trimmedName = name.trim()
 
+  const requestClose = () => {
+    if (!trimmedName) return alert('Please enter a name!')
+    onClose()
+  }
+
   const updateName = (e) => {
     e.preventDefault()
     if (!trimmedName) return
@@ -18,7 +23,7 @@ const _MyProfile = ({ onClose }) => {
 
   return (
     <div>
-      <div className="edit-profile" onClick={() => onClose()}>
+      <div className="edit-profile" onClick={requestClose}>
         <div className="inner" onClick={(e) => e.stopPropagation()}>
           <p>Tell us your name!</p>
           <form onSubmit={updateName}>
