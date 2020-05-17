@@ -21,6 +21,8 @@ export const RoomProvider = ({ id, children }) => {
       if (snap.val()) {
         userRef.onDisconnect().update({ roomId: null })
         userRef.update({ uid: user.uid, displayName: user.displayName, online: true })
+      } else {
+        userRef.update({ online: false })
       }
     }
 
@@ -39,7 +41,6 @@ export const RoomProvider = ({ id, children }) => {
       userRef.update({ online: false })
       connectionRef.off('value', onConnectionChange)
       roomRef.off('value', onRoomUpdate)
-      userRef.onDisconnect().cancel()
     }
   }, [id, user])
 
