@@ -13,9 +13,16 @@ export const RoomProvider = ({ id, children }) => {
 
     if (!user) return
 
+    const connectionRef = firebase.database().ref('.info/connected')
     const roomRef = firebase.database().ref('rooms').child(id)
     const userRef = roomRef.child('users').child(user.uid)
-    userRef.update({ uid: user.uid, displayName: user.displayName, online: true })
+
+    const onConnectionChange = snap => {
+      if (snap.val()) {
+        userRef.onDisconnect().update({ roomId: null })
+        userRef.update({ uid: user.uid, displayName: user.displayName, online: true })
+      }
+    }
 
     const onRoomUpdate = snapshot => {
       const val = snapshot.val()
@@ -24,17 +31,14 @@ export const RoomProvider = ({ id, children }) => {
       setRoom(val)
     }
 
-    const onOnline = () => {
-      userRef.update({ online: true })
-    }
-
+    connectionRef.on('value', onConnectionChange)
     roomRef.on('value', onRoomUpdate)
-    window.addEventListener('online', onOnline);
     userRef.onDisconnect().set({ online: false })
 
     return () => {
+      userRef.update({ online: false })
+      connectionRef.off('value', onConnectionChange)
       roomRef.off('value', onRoomUpdate)
-      window.removeEventListener('online', onOnline);
       userRef.onDisconnect().cancel()
     }
   }, [id, user])

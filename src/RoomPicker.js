@@ -38,7 +38,7 @@ const RoomPicker = ({ history }) => {
   useEffect(() => {
     roomsRef.on('value', (snap) => {
       const val = snap.val()
-      const newRooms = Object.keys(val).map(key => ({
+      const newRooms = Object.keys(val || {}).map(key => ({
         ...val[key],
         id: key
       }))
