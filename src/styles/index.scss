@@ -50,20 +50,22 @@ label {
 button {
   padding: 4px 6px;
   background: $pink;
+  border: 1px solid $pink;
   color: white;
   font-weight: bold;
   font-size: 4rem;
-  border: none;
 
   &[data-plain] {
     padding: 0;
     background: transparent;
+    border: none;
     border-bottom: 1px solid currentColor;
     color: inherit;
   }
 
   &[disabled] {
     background: gray;
+    border: 1px solid gray;
     cursor: not-allowed;
   }
 }
@@ -71,9 +73,9 @@ button {
 input {
   font-size: 4rem;
   padding: 4px 6px;
-  background: #eee;
   border: none;
   box-sizing: border-box;
+  border: 1px solid $pink;
 }
 
 .track-picker {

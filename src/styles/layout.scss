@@ -1,14 +1,18 @@
 .layout {
+  background: $blue-dark;
   display: flex;
   flex-direction: column;
   height: calc(100vh - 20px);
 }
 
 header {
-  background: #eee;
+  background: white;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
   padding: 10px;
   display: flex;
   justify-content: space-between;
+  border-bottom: 1px solid $blue-dark;
 
   .user-info {
     display: flex;
@@ -20,7 +24,11 @@ header {
 }
 
 main {
+  background: white;
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px;
   flex: 1;
   padding: 10px;
+  padding-bottom: 20px;
   overflow: scroll;
 }

@@ -25,7 +25,7 @@ const Results = ({ entries, users, votes }) => {
 
         return (
           <div key={entry.id} className='results-entry' data-correct={isCorrect}>
-            <p>{entry.text}</p>
+            <span className="text">{entry.text}</span>
             <div className="info">
               <span className='byline'>
                 {isCorrect ? '(Real Lyric)' : `by ${user.displayName}`}
@@ -82,7 +82,7 @@ const Ballot = ({ ready }) => {
 
             return (
               <div key={entry.id} className="option" onClick={() => vote(entry)}>
-                {entry.text}
+                <span className="text">{entry.text}</span>
               </div>
             )
           })}

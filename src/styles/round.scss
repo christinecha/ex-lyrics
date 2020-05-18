@@ -5,28 +5,36 @@
     display: flex;
     align-items: center;
     margin-right: 20px;
+    border-radius: 8px;
+    box-shadow: 5px 5px 0px 0px $pink;
   }
 
   .title {
     background: $blue-dark;
     color: white;
-    padding: 3px 5px;
+    padding: 5px 10px;
     border: 1px solid $blue-dark;
+    border-top-left-radius: 8px;
+    border-bottom-left-radius: 8px;
   }
 
   .status {
     flex: 1;
     font-size: 3.5rem;
     font-style: italic;
-    padding: 3px 8px;
+    padding: 5px 10px;
     border: 1px solid $blue-dark;
     box-sizing: border-box;
+    border-top-right-radius: 8px;
+    border-bottom-right-radius: 8px;
   }
 }
 
 
 .track-preview {
-  background: linear-gradient($blue-dark, $blue-xdark);
+  border-radius: 8px;
+  background: $blue-xdark;
+  box-shadow: -5px 5px 0px 0px $pink;
   color: white;
   margin-bottom: 10px;
   margin-left: 20px;

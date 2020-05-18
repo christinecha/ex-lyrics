@@ -49,7 +49,7 @@ const TrackPicker = ({ onChange }) => {
     <div className="track-picker">
       <input type="text" placeholder="Optional Song Keyword(s)" onChange={(e) => setQuery(e.target.value)} />
       <br />
-      <button onClick={chooseSong}>Start New Round</button>
+      <button onClick={chooseSong}>Start Round</button>
     </div>
   )
 }

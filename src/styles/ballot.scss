@@ -6,6 +6,8 @@
   border: 1px solid $blue-dark;
   margin-top: 10px;
   margin-right: 20px;
+  border-radius: 8px;
+  box-shadow: 5px 5px 0px 0px $blue-dark;
 }
 
 .ballot {
@@ -16,9 +18,12 @@
   .option {
     display: flex;
     margin: 8px 0;
-    background: $yellow;
     padding: 4px 6px;
     cursor: pointer;
+
+    .text {
+      background: $yellow;
+    }
   }
 }
 
@@ -32,7 +37,9 @@
     }
 
     &[data-correct="true"] {
-      background: $yellow;
+      .text {
+        background: $yellow;
+      }
     }
 
     .info {
