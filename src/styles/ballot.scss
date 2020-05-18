@@ -4,7 +4,8 @@
 .results {
   padding: 10px;
   border: 1px solid $blue-dark;
-  margin-top: -1px;
+  margin-top: 10px;
+  margin-right: 20px;
 }
 
 .ballot {
@@ -15,7 +16,7 @@
   .option {
     display: flex;
     margin: 8px 0;
-    background: white;
+    background: $yellow;
     padding: 4px 6px;
     cursor: pointer;
   }

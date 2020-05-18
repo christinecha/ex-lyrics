@@ -1,11 +1,28 @@
 .room {
   .users-list {
-    background: white;
-    padding: 5px 0;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: $blue-dark;
+    color: white;
+
+    padding: 10px;
     font-size: 2.8rem;
   
-    label {
-      margin: 0 3px;
+    .heading {
+      display: block;
+      font-size: 80%;
+      margin-bottom: 10px;
+    }
+
+    .users {
+      columns: 2;
+      column-fill: balance;
+
+      label {
+        display: block;
+      }
     }
   }
 }

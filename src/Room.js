@@ -6,6 +6,7 @@ import TrackPicker from './TrackPicker'
 import { SECRET_LINE, CORRECT_KEY } from './lib/constants'
 import useRoom from './useRoom';
 import useRound from './useRound';
+import Users from './Users'
 
 const LyricsDisplay = ({ lyrics, showLine, entryForm }) => {
   return (
@@ -62,23 +63,6 @@ const Entry = ({ onSubmit }) => {
   )
 }
 
-const Users = () => {
-  const room = useRoom()
-  const users = Object.values(room.users || {})
-  const points = room.points || {}
-
-  return (
-    <div className='users-list'>
-      In this room:
-      {users
-        .filter(u => u.online)
-        .map(user => (
-          <label key={user.uid}>{user.displayName || 'Anonymous'} ({points[user.uid] || 0})</label>
-        ))}
-    </div>
-  )
-}
-
 const startNewRound = ({ room, track }) => {
   const users = Object.values(room.users || {}).filter(u => u.online)
   const newRoundRef = room.ref.child('rounds').push()
@@ -124,10 +108,6 @@ const Round = () => {
   const usersOnline = (round.users || []).filter(u => room.users[u.uid] && room.users[u.uid].online)
 
 
-  if (!usersOnline.find(u => u.uid === user.uid)) {
-    return <p>Round already started. Please wait until the next one starts.</p>
-  }
-
   const submitEntry = (entry) => {
     console.log(entry)
     // DO NOT ALLOW MULTIPLE ENTRIES
@@ -147,6 +127,15 @@ const Round = () => {
   const entriesComplete = entries.length > users.length
   console.log(entries.length, 'entries submitted')
   console.log(votes.length, 'votes submitted')
+
+
+  useEffect(() => {
+    if (!isAdmin) return
+    if (votes.length >= users.length) {
+      endRound()
+    }
+  }, [isAdmin, votes, users])
+
 
   const endRound = () => {
     if (round.complete) return
@@ -176,16 +165,13 @@ const Round = () => {
     room.ref.update({ points })
   }
 
-  useEffect(() => {
-    if (!isAdmin) return
-    if (votes.length >= users.length) {
-      endRound()
-    }
-  }, [isAdmin, votes, users])
-
   console.log('my vote:', myVote)
 
   const votingComplete = votes.length >= users.length
+
+  if (!usersOnline.find(u => u.uid === user.uid)) {
+    return <p>Round already started. Please wait until the next one starts.</p>
+  }
 
 
   let state

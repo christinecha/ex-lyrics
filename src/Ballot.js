@@ -75,15 +75,17 @@ const Ballot = ({ ready }) => {
     <div className="ballot">
       <label>Tap to choose the correct line:</label>
       <div className="options">
-        {entries.map(entry => {
-          if (entry.authorId === user.uid) return null
+        {entries
+          .sort(() => Math.random() > 0.5 ? 1 : -1)
+          .map(entry => {
+            if (entry.authorId === user.uid) return null
 
-          return (
-            <div key={entry.id} className="option" onClick={() => vote(entry)}>
-              {entry.text}
-            </div>
-          )
-        })}
+            return (
+              <div key={entry.id} className="option" onClick={() => vote(entry)}>
+                {entry.text}
+              </div>
+            )
+          })}
       </div>
     </div>
   )

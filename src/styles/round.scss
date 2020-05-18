@@ -4,6 +4,7 @@
   .header {
     display: flex;
     align-items: center;
+    margin-right: 20px;
   }
 
   .title {
@@ -25,9 +26,11 @@
 
 
 .track-preview {
-  border: 1px solid $blue-dark;
+  background: $blue-xdark;
+  color: white;
   margin-bottom: 10px;
-  margin-top: -1px;
+  margin-left: 20px;
+  margin-top: 10px;
   padding: 10px;
 
   .track-name {
@@ -37,19 +40,19 @@
   .track-album {
     display: block;
     margin: 2px 0;
-    color: #666;
+    opacity: 0.6;
   }
 
   .track-artist {
     display: block;
     margin: 2px 0;
+    margin-bottom: 10px;
   }
 
   .track-genres label {
     display: inline-block;
+    font-size: 60%;
     margin-right: 5px;
-    background: white;
-    padding: 2px 4px;
   }
 }
 
@@ -61,12 +64,11 @@
     min-height: 1.6em;
 
     &[data-revealed="true"] {
-      color: $blue-dark;
+      color: $yellow;
       font-weight: bold;
     }
 
     &[data-hidden="true"] {
-      background: white;
       text-align: center;
     }
   }
