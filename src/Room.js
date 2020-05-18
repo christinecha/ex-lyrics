@@ -203,7 +203,7 @@ const Round = () => {
       <TrackPreview
         track={round.track}
         showLine={round.complete}
-        entryForm={myEntry ? '~ ??? ~' : <Entry onSubmit={submitEntry} />}
+        entryForm={myEntry ? '~ mystery line ~' : <Entry onSubmit={submitEntry} />}
       />
     </div>
   )

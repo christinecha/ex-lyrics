@@ -26,7 +26,7 @@
 
 
 .track-preview {
-  background: $blue-xdark;
+  background: linear-gradient($blue-dark, $blue-xdark);
   color: white;
   margin-bottom: 10px;
   margin-left: 20px;
@@ -66,10 +66,6 @@
     &[data-revealed="true"] {
       color: $yellow;
       font-weight: bold;
-    }
-
-    &[data-hidden="true"] {
-      text-align: center;
     }
   }
 }

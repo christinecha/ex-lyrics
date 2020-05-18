@@ -27,6 +27,8 @@ const Layout = ({ children }) => {
         {children}
       </main>
 
+      <footer id="footer"></footer>
+
       {showProfile && <MyProfile onClose={() => setShowProfile(false)} />}
     </div>
   )
