@@ -20,6 +20,7 @@ const TrackPicker = ({ onChange }) => {
   const chooseSong = () => {
     searchTracks({ q: query })
       .then(results => {
+        console.log(results)
         const tracks = results.map(r => r.track).filter(t => t.has_lyrics)
         const rand = Math.floor(Math.random() * tracks.length)
         const randomTrack = tracks[rand]

@@ -24,6 +24,6 @@ export const searchTracks = ({ q = '' }) => {
     url: `/.netlify/functions/searchTracks?q=${q}`,
     method: 'GET'
   }).then(res => {
-    return res.data.track_list
+    return res.data.track_list.filter(t => !t.track.explicit)
   })
 }
