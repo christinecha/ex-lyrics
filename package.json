@@ -17,7 +17,7 @@
     "deploy": "yarn run build && netlify deploy --prod"
   },
   "dependencies": {
-    "axios": "^0.19.2",
+    "axios": "^0.21.1",
     "core-js": "^3.6.5",
     "firebase": "^7.14.3",
     "nanoid": "^3.1.8",
